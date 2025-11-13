@@ -5,6 +5,5 @@ import kotlin.math.abs
 
 class Day1 {
     fun solve() {
-        println("hui")
     }
 }
