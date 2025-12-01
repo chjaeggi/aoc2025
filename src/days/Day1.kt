@@ -8,6 +8,7 @@ class Day1 {
     var lastPosition = 50
     var zeroHit = 0
     var zeroCrossing = 0
+
     fun solve() {
         execFileByLine(1) {
             val isLeft = it.contains("L")
@@ -29,9 +30,9 @@ class Day1 {
                 currentPosition += 100
             }
             currentPosition %= 100
+            if (currentPosition == 0) zeroHit++
 
             lastPosition = currentPosition
-            if (lastPosition == 0) zeroHit++
         }
 
         println(zeroHit)
