@@ -5,22 +5,23 @@ import utils.execFileByLine
 class Day1 {
 
     var currentPosition = 50
-    val positions = mutableListOf(currentPosition)
-    var zeroPass = 0
+    var lastPosition = 50
+    var zeroHit = 0
+    var zeroCrossing = 0
     fun solve() {
         execFileByLine(1) {
             val isLeft = it.contains("L")
             var rotateBy = it.removePrefix(if (isLeft) "L" else "R").toInt()
 
-            zeroPass += rotateBy / 100
+            zeroCrossing += rotateBy / 100
             rotateBy %= 100
 
             val rotateTo = if (isLeft) currentPosition - rotateBy else currentPosition + rotateBy
 
             if (rotateTo == 0 || rotateTo == 100) {
-                zeroPass++
-            } else if (rotateTo !in 0..100 && positions.last() != 0) {
-                zeroPass++
+                zeroCrossing++
+            } else if (rotateTo !in 0..100 && lastPosition != 0) {
+                zeroCrossing++
             }
 
             currentPosition = rotateTo
@@ -29,9 +30,11 @@ class Day1 {
             }
             currentPosition %= 100
 
-            positions.add(currentPosition)
+            lastPosition = currentPosition
+            if (lastPosition == 0) zeroHit++
         }
-        println(positions.count { it == 0 })
-        println(zeroPass)
+
+        println(zeroHit)
+        println(zeroCrossing)
     }
 }
