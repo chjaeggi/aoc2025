@@ -6,26 +6,24 @@ class Day1 {
 
     var currentPosition = 50
     val positions = mutableListOf(currentPosition)
-    var hitZero = 0
+    var zeroPass = 0
     fun solve() {
         execFileByLine(1) {
             val isLeft = it.contains("L")
             var rotateBy = it.removePrefix(if (isLeft) "L" else "R").toInt()
 
-            hitZero += rotateBy / 100
+            zeroPass += rotateBy / 100
             rotateBy %= 100
 
-            val newPositionBeforeModulo = if (isLeft) currentPosition - rotateBy else currentPosition + rotateBy
+            val rotateTo = if (isLeft) currentPosition - rotateBy else currentPosition + rotateBy
 
-            if (newPositionBeforeModulo == 0 || newPositionBeforeModulo == 100) {
-                hitZero++
-            } else if (newPositionBeforeModulo < 0 && positions.last() != 0) {
-                hitZero++
-            } else if (newPositionBeforeModulo > 100 && positions.last() != 0) {
-                hitZero++
+            if (rotateTo == 0 || rotateTo == 100) {
+                zeroPass++
+            } else if (rotateTo !in 0..100 && positions.last() != 0) {
+                zeroPass++
             }
 
-            currentPosition = newPositionBeforeModulo
+            currentPosition = rotateTo
             if (currentPosition < 0) {
                 currentPosition += 100
             }
@@ -34,6 +32,6 @@ class Day1 {
             positions.add(currentPosition)
         }
         println(positions.count { it == 0 })
-        println(hitZero)
+        println(zeroPass)
     }
 }
