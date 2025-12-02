@@ -14,57 +14,46 @@ class Day2 {
                 val (f, t) = it.split("-")
                 val from = f.toLong()
                 val to = t.toLong()
-                f1@ for (number in from..to) {
-                    val digitsAsString = number.toString()
-                    val digitCount = digitsAsString.length
-
-                    if (digitCount % 2 == 0) {
-                        var left = 0
-                        var right = digitCount / 2
-                        val digitArray = digitsAsString.map { it.digitToInt() }.toIntArray()
-
-                        while (left < digitCount / 2) {
-                            if (digitArray[left] == digitArray[right]) {
-                                left++
-                                right++
-                            } else {
-                                continue@f1
-                            }
-                        }
-                        result1 += number
-                    }
-                }
-
                 for (number in from..to) {
                     val digitsAsString = number.toString()
-                    val digitCount = digitsAsString.length
-                    val windowSizes = digitCount.findDivisors()
-
-                    for (windowSize in windowSizes) {
-                        if (windowSize > digitCount / 2) {
-                            break
-                        }
-
-                        val firstChunk = digitsAsString.take(windowSize)
-                        var isRepeating = true
-
-                        for (idxToCheck in windowSize until digitCount step windowSize) {
-                            val currentChunk =
-                                digitsAsString.substring(idxToCheck, idxToCheck + windowSize)
-                            if (currentChunk != firstChunk) {
-                                isRepeating = false
-                                break
-                            }
-                        }
-                        if (isRepeating) {
-                            result2 += number
-                        }
+                    if (digitsAsString.isSplitRepeat()) {
+                        result1 += number
+                    }
+                    if (digitsAsString.isChunkRepeat()) {
+                        result2 += number
                     }
                 }
             }
         }
         println(result1)
         println(result2)
+    }
+
+    private fun String.isSplitRepeat(): Boolean {
+        if (length % 2 != 0) return false
+        val half = length / 2
+        return take(half) == substring(half, length)
+    }
+
+    private fun String.isChunkRepeat(): Boolean {
+        val windowSizes = length.findDivisors()
+
+        for (windowSize in windowSizes) {
+            if (windowSize > length / 2) break
+
+            val firstChunk = substring(0, windowSize)
+            var isRepeating = true
+
+            for (idxToCheck in windowSize until length step windowSize) {
+                if (substring(idxToCheck, idxToCheck + windowSize) != firstChunk) {
+                    isRepeating = false
+                    break
+                }
+            }
+
+            if (isRepeating) return true
+        }
+        return false
     }
 
     private fun Int.findDivisors(): List<Int> {
