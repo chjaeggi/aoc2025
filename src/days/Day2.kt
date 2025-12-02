@@ -10,19 +10,10 @@ class Day2 {
 
     fun solve() {
         execFileByLine(2) {
-            it.split(",").forEach {
-                val (f, t) = it.split("-")
-                val from = f.toLong()
-                val to = t.toLong()
-                for (number in from..to) {
-                    val digitsAsString = number.toString()
-                    if (digitsAsString.isSplitRepeat()) {
-                        result1 += number
-                    }
-                    if (digitsAsString.isChunkRepeat()) {
-                        result2 += number
-                    }
-                }
+            it.split(",").map {
+                val (from, to) = it.split("-").map { it.toLong() }
+                result1 += (from..to).filter { it.toString().isSplitRepeat() }.sum()
+                result2 += (from..to).filter { it.toString().isChunkRepeat() }.sum()
             }
         }
         println(result1)
