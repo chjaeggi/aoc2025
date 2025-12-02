@@ -31,8 +31,7 @@ class Day2 {
 
     private fun String.isSplitRepeat(): Boolean {
         if (length % 2 != 0) return false
-        val half = length / 2
-        return take(half) == substring(half, length)
+        return take(length / 2) == substring(length / 2, length)
     }
 
     private fun String.isChunkRepeat(): Boolean {
