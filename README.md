@@ -21,7 +21,7 @@ function i.a.
 | Day | Title           | Links                                                                                                                      |
 |-----|-----------------|----------------------------------------------------------------------------------------------------------------------------|
 | 1   | Secret Entrance | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day1.kt) [\[AoC\]](http://adventofcode.com/2025/day/1)   |
-| 2   | tbd             | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day2.kt) [\[AoC\]](http://adventofcode.com/2025/day/2)   |
+| 2   | Gift Shop       | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day2.kt) [\[AoC\]](http://adventofcode.com/2025/day/2)   |
 | 3   | tbd             | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day3.kt) [\[AoC\]](http://adventofcode.com/2025/day/3)   |
 | 4   | tbd             | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day4.kt) [\[AoC\]](http://adventofcode.com/2025/day/4)   |
 | 5   | tbd             | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day5.kt) [\[AoC\]](http://adventofcode.com/2025/day/5)   |
