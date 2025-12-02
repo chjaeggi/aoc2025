@@ -1,7 +1,6 @@
 package days
 
 import utils.execFileByLine
-import kotlin.math.sqrt
 
 class Day2 {
 
@@ -26,35 +25,14 @@ class Day2 {
     }
 
     private fun String.isChunkRepeat(): Boolean {
-        val windowSizes = length.findDivisors()
-
-        for (windowSize in windowSizes) {
-            if (windowSize > length / 2) break
-
-            val firstChunk = substring(0, windowSize)
-            var isRepeating = true
-
-            for (idxToCheck in windowSize until length step windowSize) {
-                if (substring(idxToCheck, idxToCheck + windowSize) != firstChunk) {
-                    isRepeating = false
-                    break
+        for (chunkLength in 1..length / 2) {
+            if (length % chunkLength == 0) {
+                val firstChunk = this.substring(0, chunkLength)
+                if (this == firstChunk.repeat(length / chunkLength)) {
+                    return true
                 }
             }
-
-            if (isRepeating) return true
         }
         return false
     }
-
-    private fun Int.findDivisors(): List<Int> {
-        val divisors = mutableSetOf<Int>()
-        for (i in 1..sqrt(this.toDouble()).toInt()) {
-            if (this % i == 0) {
-                divisors.add(i)
-                divisors.add(this / i)
-            }
-        }
-        return divisors.sorted()
-    }
-
 }
