@@ -11,5 +11,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="io.arrow.kt.core" level="project" />
+    <orderEntry type="library" name="io.arrow.kt.functions" level="project" />
   </component>
 </module>
