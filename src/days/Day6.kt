@@ -30,19 +30,19 @@ class Day6 {
 
     private fun List<String>.getColNumbers(
     ): List<List<Int>> {
-        val colNumbers = mutableListOf<List<Int>>()
-        val possibleNumbers = mutableListOf<Int>()
+        val numbers = mutableListOf<List<Int>>()
+        val colNums = mutableListOf<Int>()
         for (i in this[0].indices) {
             val numberString = (0..<this.size).joinToString("") { j -> this[j][i].toString() }
             if (numberString.isNotBlank()) {
-                possibleNumbers.add(numberString.trim().toInt())
+                colNums.add(numberString.trim().toInt())
             } else {
-                colNumbers += possibleNumbers.toList()
-                possibleNumbers.clear()
+                numbers += colNums.toList()
+                colNums.clear()
             }
         }
-        if (possibleNumbers.isNotEmpty()) colNumbers += possibleNumbers.toList()
-        return colNumbers
+        if (colNums.isNotEmpty()) numbers += colNums.toList()
+        return numbers
     }
 
     fun List<Int>.chunkedByStride(stride: Int): List<List<Int>> {
