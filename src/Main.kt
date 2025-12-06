@@ -1,5 +1,5 @@
 import days.*
 
 fun main() {
-    Day5().solve()
+    Day6().solve()
 }

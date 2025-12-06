@@ -25,7 +25,7 @@ function i.a.
 | 3   | Lobby               | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day3.kt) [\[AoC\]](http://adventofcode.com/2025/day/3)   |
 | 4   | Printing Department | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day4.kt) [\[AoC\]](http://adventofcode.com/2025/day/4)   |
 | 5   | Cafeteria           | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day5.kt) [\[AoC\]](http://adventofcode.com/2025/day/5)   |
-| 6   | tbd                 | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day6.kt) [\[AoC\]](http://adventofcode.com/2025/day/6)   |
+| 6   | Trash Compactor     | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day6.kt) [\[AoC\]](http://adventofcode.com/2025/day/6)   |
 | 7   | tbd                 | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day7.kt) [\[AoC\]](http://adventofcode.com/2025/day/7)   |
 | 8   | tbd                 | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day8.kt) [\[AoC\]](http://adventofcode.com/2025/day/8)   |
 | 9   | tbd                 | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day9.kt) [\[AoC\]](http://adventofcode.com/2025/day/9)   |
