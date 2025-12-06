@@ -1,6 +1,5 @@
 package days
 
-import utils.execFileByLine
 import utils.execFileByLineInGroups
 import utils.numberOfLinesPerFile
 
@@ -9,44 +8,41 @@ class Day6 {
     fun solve() {
         val nOfLines = numberOfLinesPerFile(6)
         val numbers = mutableListOf<Int>()
-        val numbersRtl = mutableListOf<List<Int>>()
+        val colNumbers = mutableListOf<List<Int>>()
         val operators = mutableListOf<Char>()
-        val numberRegex = Regex("""\d+""")
-        val operatorRegex = Regex("""[*+]""")
 
-        execFileByLine(6) {
-            numbers += numberRegex.findAll(it).map { match -> match.value.toInt() }.toList()
-            operators += operatorRegex.findAll(it).map { match -> match.value.first() }.toList()
+        execFileByLineInGroups(6, nOfLines - 1) {
+            if (it.size > 1) {
+                numbers += Regex("""\d+""").findAll(it.joinToString())
+                    .map { match -> match.value.toInt() }.toList()
+                colNumbers += it.getColNumbers()
+            } else {
+                operators += Regex("""[*+]""").findAll(it.joinToString())
+                    .map { match -> match.value.first() }.toList()
+            }
         }
 
         val numbersPerLine = numbers.size / (nOfLines - 1)
         val chunked = numbers.chunkedByStride(numbersPerLine)
         println(chunked.applyOperations(operators))
+        println(colNumbers.applyOperations(operators))
+    }
 
-        execFileByLineInGroups(6, 4) {
-
-            val mutated = it.toMutableList()
-            mutated[0] += "  "
-            if (mutated.size > 1) {
-                val possibleNumbers = mutableListOf<Int>()
-                for (i in mutated[0].indices) {
-                    var numberString = ""
-                    for (j in 0..<mutated.size) {
-                        numberString += mutated[j][i]
-                    }
-                    if (numberString.isNotBlank()) {
-                        possibleNumbers.add(numberString.trim().toInt())
-                    } else {
-                        numbersRtl += possibleNumbers.toList()
-                        possibleNumbers.clear()
-                    }
-                    if (i == mutated[0].lastIndex) {
-                        numbersRtl += possibleNumbers.toList()
-                    }
-                }
+    private fun List<String>.getColNumbers(
+    ): List<List<Int>> {
+        val colNumbers = mutableListOf<List<Int>>()
+        val possibleNumbers = mutableListOf<Int>()
+        for (i in this[0].indices) {
+            val numberString = (0..<this.size).joinToString("") { j -> this[j][i].toString() }
+            if (numberString.isNotBlank()) {
+                possibleNumbers.add(numberString.trim().toInt())
+            } else {
+                colNumbers += possibleNumbers.toList()
+                possibleNumbers.clear()
             }
         }
-        println(numbersRtl.applyOperations(operators))
+        if (possibleNumbers.isNotEmpty()) colNumbers += possibleNumbers.toList()
+        return colNumbers
     }
 
     fun List<Int>.chunkedByStride(stride: Int): List<List<Int>> {
