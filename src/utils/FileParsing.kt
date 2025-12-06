@@ -2,7 +2,6 @@ package utils
 
 import java.io.File
 
-
 fun execFileByLine(number: Int, f: (str: String) -> Unit) =
     File("./src/inputs/input$number.txt").forEachLine { f(it) }
 
