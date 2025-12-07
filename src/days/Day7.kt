@@ -4,13 +4,10 @@ import utils.*
 
 class Day7 {
 
-    val manifold =
-        Array(numberOfLinesPerFile(7)) { CharArray(numberOfCharsPerLine(7)) }
+    val manifold = Array(numberOfLinesPerFile(7)) { CharArray(numberOfCharsPerLine(7)) }
 
     var splitStart = mutableSetOf<Point2D>()
     var splitEntry = mutableSetOf<Point2D>()
-
-    val knownTimelines = mutableMapOf<Point2D, Long>()
 
     var start: Point2D? = null
     fun solve() {
@@ -24,7 +21,7 @@ class Day7 {
         }
         runBeam(start!!)
         println(splitEntry.size)
-        println(nOfPaths(start!!))
+        println(nOfPaths(start!!, mutableMapOf()))
     }
 
     private fun runBeam(pos: Point2D) {
@@ -45,21 +42,14 @@ class Day7 {
         }
     }
 
-    private fun nOfPaths(pos: Point2D, noOfTimelines: Long = 0L): Long {
-        if (manifold.atOrNull(pos.s) == null) {
-            return 1L
-        }
-        if (manifold.atOrNull(pos.s) == '.') {
-            return nOfPaths(pos.s, noOfTimelines)
-        }
-        if (manifold.atOrNull(pos.s) == '^') {
-            if (knownTimelines[pos.s] != null) {
-                return knownTimelines[pos.s]!!
+    private fun nOfPaths(pos: Point2D, cache: MutableMap<Point2D, Long>): Long {
+        return cache.getOrPut(pos.s) {
+            when (manifold.atOrNull(pos.s)) {
+                null -> 1L
+                '.' -> nOfPaths(pos.s, cache)
+                '^' -> nOfPaths(pos.sw, cache) + nOfPaths(pos.se, cache)
+                else -> throw IllegalStateException("Should never reach this")
             }
-            val res = nOfPaths(pos.sw, noOfTimelines) + nOfPaths(pos.se, noOfTimelines)
-            knownTimelines[pos.s] = res
-            return res
         }
-        throw IllegalStateException("Should never reach this")
     }
 }
