@@ -11,7 +11,5 @@ class Day8 {
             val (x, y, z) = it.split(",").map { it.toInt() }
             boxes.add(Point3D(x, y, z))
         }
-        
     }
-    
 }
