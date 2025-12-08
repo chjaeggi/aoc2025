@@ -1,5 +1,8 @@
 package utils
 
+import kotlin.math.pow
+import kotlin.math.sqrt
+
 data class Point2D(
     val x: Int,
     val y: Int,
@@ -12,6 +15,25 @@ data class Point2D(
     val se get() = this + Direction.SE
     val sw get() = this + Direction.SW
     val nw get() = this + Direction.NW
+}
+
+data class Point3D(
+    val x: Int,
+    val y: Int,
+    val z: Int,
+)
+
+fun Point3D.distanceTo(to: Point3D): Double {
+    val xd = (to.x.toDouble() - x.toDouble()).pow(2)
+    val yd = (to.y.toDouble() - y.toDouble()).pow(2)
+    val zd = (to.z.toDouble() - z.toDouble()).pow(2)
+    return sqrt(xd + yd + zd)
+}
+
+fun Point2D.distanceTo(to: Point2D): Double {
+    val xd = (to.x.toDouble() - x.toDouble()).pow(2)
+    val yd = (to.y.toDouble() - y.toDouble()).pow(2)
+    return sqrt(xd + yd)
 }
 
 data class Point2DWithDirection(
