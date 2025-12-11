@@ -1,27 +1,13 @@
 package days
 
-import utils.execFileByLine
+import utils.*
 
-typealias Network = MutableMap<Device, List<Connection>>
-
+/**
+ * Application-specific aliases using the generic Graph utility.
+ */
+typealias Network = Graph<Device>
+typealias Connection = Edge<Device>
 data class Device(val name: String)
-data class Connection(val from: Device, val to: Device)
-
-enum class EdgeType {
-    Directed, Undirected
-}
-
-fun Connection.invert() = copy(from = to, to = from)
-
-fun MutableMap<Device, List<Connection>>.add(type: EdgeType, connection: Connection) {
-    val fromRoutes = this[connection.from] ?: emptyList()
-    this[connection.from] = fromRoutes + connection
-
-    if (type == EdgeType.Undirected) {
-        val toRoutes = this[connection.to] ?: emptyList()
-        this[connection.to] = toRoutes + connection.invert()
-    }
-}
 
 fun Network.countPathsWithVias(
     current: Device,
