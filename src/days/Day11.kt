@@ -23,34 +23,32 @@ fun MutableMap<Device, List<Connection>>.add(type: EdgeType, connection: Connect
     }
 }
 
-fun findPathsRecursive(
-    network: Network,
-    currentNode: Device,
-    endNode: Device,
-    vias: List<Device>,
-    currentPath: ArrayDeque<Device>,
-    allPathsFound: MutableList<List<Device>>
-) {
-    currentPath.addLast(currentNode)
+fun Network.countPathsWithVias(
+    current: Device,
+    end: Device,
+    vias: Set<Device>,
+    cache: MutableMap<Pair<Device, Set<Device>>, Long>
+): Long {
+    val cacheKey = Pair(current, vias)
+    cache[cacheKey]?.let { return it }
 
-    if (currentNode == endNode && vias.all { it in currentPath }) {
-        allPathsFound.add(currentPath.toList())
-    } else {
-        network[currentNode]?.forEach { connection ->
-            val neighbor = connection.to
-            if (neighbor !in currentPath) {
-                findPathsRecursive(network, neighbor, endNode, vias, currentPath, allPathsFound)
-            }
+    val remainingVias = vias - current
+
+    if (current == end) {
+        return if (remainingVias.isEmpty()) 1L else 0L
+    }
+
+    val connections = this[current]
+    var totalPaths = 0L
+
+    if (connections != null) {
+        for (connection in connections) {
+            totalPaths += countPathsWithVias(connection.to, end, remainingVias, cache)
         }
     }
-    currentPath.removeLast()
-}
 
-fun Network.findAllPaths(start: Device, end: Device, vias: List<Device>): List<List<Device>> {
-    val allPathsFound = mutableListOf<List<Device>>()
-    val currentPath = ArrayDeque<Device>()
-    findPathsRecursive(this, start, end, vias, currentPath, allPathsFound)
-    return allPathsFound
+    cache[cacheKey] = totalPaths
+    return totalPaths
 }
 
 class Day11 {
@@ -66,15 +64,22 @@ class Day11 {
             }
         }
 
-        val allFromYouToOut = network.findAllPaths(
-            Device("you"), Device("out"), emptyList()
+        val allFromYouToOut = network.countPathsWithVias(
+            current = Device("you"),
+            end = Device("out"),
+            vias = emptySet(),
+            cache = mutableMapOf()
         )
-//        val allFromSvrViaDacViaFftToOut = network.findAllPaths(
-//            Device("svr"), Device("out"), listOf(
-//                Device("dac"), Device("fft")
-//            )
-//        )
-        println(allFromYouToOut.size)
+
+        val countFromSvrToOut = network.countPathsWithVias(
+            current = Device("svr"),
+            end = Device("out"),
+            vias = setOf(Device("dac"), Device("fft")),
+            cache = mutableMapOf()
+        )
+
+        println(allFromYouToOut)
+        println(countFromSvrToOut)
     }
 
 }
