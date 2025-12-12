@@ -31,4 +31,4 @@ function i.a.
 | 9   | Movie Theater       | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day9.kt) [\[AoC\]](http://adventofcode.com/2025/day/9)   |
 | 10  | Factory             | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day10.kt) [\[AoC\]](http://adventofcode.com/2025/day/10) |
 | 11  | Reactor             | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day11.kt) [\[AoC\]](http://adventofcode.com/2025/day/11) |
-| 12  | tbd                 | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day12.kt) [\[AoC\]](http://adventofcode.com/2025/day/11) |
+| 12  | Christmas Tree Farm | [\[Code\]](https://github.com/chjaeggi/aoc2025/blob/main/src/days/Day12.kt) [\[AoC\]](http://adventofcode.com/2025/day/11) |
