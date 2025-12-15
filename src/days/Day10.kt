@@ -32,8 +32,8 @@ class Day10 {
                 solutionsByParity
             )
         }
-        println("Res: $res1")
-        println("Res: $res2")
+        println(res1)
+        println(res2)
     }
 
     private fun parseLine(line: String): MachinePuzzle {
