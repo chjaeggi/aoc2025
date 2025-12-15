@@ -17,7 +17,7 @@ fun main() {
         Day12().solve()
     }
     
-    println("----")
+    println("----------")
     println("Executed in: $overallTime")
 
 }

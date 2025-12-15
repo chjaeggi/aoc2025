@@ -6,7 +6,7 @@ import utils.execFileByLine
 import utils.overlaps
 
 
-// THANKS TODD
+// THANKS TODD :D
 class Day9 {
 
     fun solve() {
@@ -20,12 +20,13 @@ class Day9 {
         val rects = createRectangles(redTiles).sortedByDescending { it.area }
         println(rects.first().area)
 
+        val lines = redTiles
+            .zipWithNext()
+            .flatMap { (left, right) -> createRectangles(setOf(left, right)) }
+        
         println(
             rects.first { r ->
-                redTiles
-                    .zipWithNext()
-                    .flatMap { (left, right) -> createRectangles(setOf(left, right)) }
-                    .none { line -> line.overlaps(r.inner()) }
+                lines.none { line -> line.overlaps(r.inner()) }
             }.area
         )
     }
@@ -36,7 +37,7 @@ class Day9 {
         for (redTile in tiles) {
             for (otherTile in tiles) {
                 if (redTile != otherTile) {
-                    rects += Rectangle(redTile.x, otherTile.x, redTile.y, otherTile.y)
+                    rects += Rectangle(redTile, otherTile)
                 }
             }
         }

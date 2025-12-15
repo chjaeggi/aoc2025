@@ -21,15 +21,13 @@ data class Point2D(
 }
 
 class Rectangle(
-    x1: Int,
-    x2: Int,
-    y1: Int,
-    y2: Int,
+    point1: Point2D,
+    point2: Point2D
 ) {
-    val xStart: Int = min(x1, x2)
-    val xEnd: Int = max(x1, x2)
-    val yStart: Int = min(y1, y2)
-    val yEnd: Int = max(y1, y2)
+    val xStart: Int = min(point1.x, point2.x)
+    val xEnd: Int = max(point1.x, point2.x)
+    val yStart: Int = min(point1.y, point2.y)
+    val yEnd: Int = max(point1.y, point2.y)
 
     val area: Long
         get() {
@@ -38,10 +36,8 @@ class Rectangle(
 
     fun inner(): Rectangle =
         Rectangle(
-            xStart + 1,
-            xEnd - 1,
-            yStart + 1,
-            yEnd - 1
+            Point2D(xStart + 1, yStart + 1),
+            Point2D(xEnd - 1, yEnd - 1),
         )
 
     override fun equals(other: Any?): Boolean {
