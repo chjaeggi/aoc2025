@@ -12,6 +12,7 @@ solutions are very concise as well as idiomatic to read.
 His repos are always very inspirational! I learned a lot from him.
 
 Also, some solutions are inspired by [ClouddJR](https://github.com/ClouddJR/advent-of-code-2025/tree/main)
+
 Just use the main class and execute either the appropriate `solve` functions in the according `Day` classes or any `day`
 function i.a.
 
