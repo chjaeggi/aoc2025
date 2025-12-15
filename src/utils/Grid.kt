@@ -1,7 +1,10 @@
 package utils
 
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.text.compareTo
 
 data class Point2D(
     val x: Int,
@@ -15,6 +18,50 @@ data class Point2D(
     val se get() = this + Direction.SE
     val sw get() = this + Direction.SW
     val nw get() = this + Direction.NW
+}
+
+class Rectangle(
+    x1: Int,
+    x2: Int,
+    y1: Int,
+    y2: Int,
+) {
+    val xStart: Int = min(x1, x2)
+    val xEnd: Int = max(x1, x2)
+    val yStart: Int = min(y1, y2)
+    val yEnd: Int = max(y1, y2)
+
+    val area: Long
+        get() {
+            return (xEnd - xStart + 1L) * (yEnd - yStart + 1L)
+        }
+
+    fun inner(): Rectangle =
+        Rectangle(
+            xStart + 1,
+            xEnd - 1,
+            yStart + 1,
+            yEnd - 1
+        )
+
+    override fun equals(other: Any?): Boolean {
+        val other = other as? Rectangle ?: return false
+        return this.xStart == other.xStart && this.xEnd == other.xEnd && this.yStart == other.yStart && this.yEnd == other.yEnd
+    }
+
+    override fun hashCode(): Int {
+        var result = xStart
+        result = 31 * result + xEnd
+        result = 31 * result + yStart
+        result = 31 * result + yEnd
+        result = 31 * result + area.hashCode()
+        return result
+    }
+}
+
+fun Rectangle.overlaps(other: Rectangle): Boolean {
+    return this.xStart <= other.xEnd && this.xEnd >= other.xStart &&
+            this.yStart <= other.yEnd && this.yEnd >= other.yStart
 }
 
 data class Point3D(

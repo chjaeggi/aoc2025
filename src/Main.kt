@@ -1,6 +1,5 @@
 import days.*
-import utils.execFileByLine
 
 fun main() {
-    Day10().solve()
+    Day9().solve()
 }
